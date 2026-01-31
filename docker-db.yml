@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    container_name: sales_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-change_me}"
+      MYSQL_DATABASE: sales_db
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3333:3306"
+    networks:
+      - salesnet
+
+volumes:
+  db_data:
+
+networks:
+  salesnet:
+    driver: bridge
